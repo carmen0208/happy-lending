@@ -1,0 +1,21 @@
+{
+  "name": "happy-lending",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "cpsoplia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-11155111 frontend/contracts",
+    "cplineasoplia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-59141 frontend/contracts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.6"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "solady": "^0.0.227"
+  }
+}
