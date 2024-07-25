@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "deployToSepolia": "hardhat ignition deploy ./ignition/modules/LendingLoot.ts --network sepolia",
+    "deployToLineaSepolia": "hardhat ignition deploy ./ignition/modules/LendingLoot.ts --network linea_sepolia",
     "test": "hardhat test",
-    "cpsoplia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-11155111 frontend/contracts",
-    "cplineasoplia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-59141 frontend/contracts"
+    "cpSepolia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-11155111 frontend/contracts",
+    "cpLineaSepolia": "rm -rf frontend/contracts && cp -r ignition/deployments/chain-59141 frontend/contracts"
   },
   "author": "",
   "license": "ISC",
