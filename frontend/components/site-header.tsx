@@ -3,9 +3,7 @@
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
 import { MetaMaskButton } from "@metamask/sdk-react-ui";
-import { ConnectKitButton } from "connectkit";
 import { useTheme } from "next-themes";
 
 export function SiteHeader() {
@@ -22,7 +20,10 @@ export function SiteHeader() {
           </div>
           <nav className="flex items-center">
             <div className="p-2">
-            <MetaMaskButton theme={theme  as "light" | "dark"} color={theme === "light" ? "white": "blue"}></MetaMaskButton>
+            <MetaMaskButton 
+              theme={theme  as "light" | "dark"} 
+              color={theme === "light" ? "white": "blue"} 
+            />
             </div>
             <ModeToggle />
           </nav>

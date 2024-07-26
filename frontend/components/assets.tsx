@@ -17,6 +17,7 @@ import lendArtifacts from "../contracts/artifacts/LendingLoot#NFTLendingProtocol
 import { Buffer } from "buffer";
 import { Button } from "./ui/button";
 
+const ownedTokenIds = [1,2,3,4,5]
 export function Assets({}) {
   const lootAddress = smartcontractAddress["LendingLoot#LootTemplate"];
   const lendingAddress = smartcontractAddress["LendingLoot#NFTLendingProtocol"]
@@ -31,11 +32,9 @@ export function Assets({}) {
       if (!connected || !provider) {
         return;
       }
-      console.log("provider" , provider)
       const _web3Provider = new providers.Web3Provider(
         provider as unknown as providers.ExternalProvider
       );
-      console.log("_web3Provider" , _web3Provider)
 
       setWeb3Provider(_web3Provider);
       const lootContract = new Contract(
@@ -45,12 +44,10 @@ export function Assets({}) {
       );
 
       const lendingContract = new Contract(lendingAddress, lendArtifacts.abi, _web3Provider.getSigner())
-      console.log("lendingContract" , lendingContract)
 
       setLendingContract(lendingContract)
-      const tokenIds = [1, 2, 3, 4, 5];
       const svgs = await Promise.all(
-        tokenIds.map(async (tokenId) => {
+        ownedTokenIds.map(async (tokenId) => {
           const token = await lootContract.tokenURI(tokenId);
           const encoded = token.split(",")[1];
           const decode = Buffer.from(encoded, "base64").toString("binary");
@@ -72,10 +69,11 @@ export function Assets({}) {
     const interestRate = 5 // 5% interest rate
     const duration = 36000; // Loan duration in seconds (10 hour)
 
-    const transaction = await lendingContract.createLoan(tokenId, lootAddress, loanAmount, interestRate, duration, {
+    const _transaction = await lendingContract.createLoan(tokenId, lootAddress, loanAmount, interestRate, duration, {
       gasLimit: 5000000
     })
-    const receipt = await transaction.wait();
+    alert(`transaction hash: ${_transaction.hash}`)
+    const receipt = await _transaction.wait();
     console.log('Loan created successfully:', receipt);
   }, [lendingContract, lootAddress])
 
@@ -90,7 +88,7 @@ export function Assets({}) {
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {nfts.map((nfts) => (
               <div key={nfts.tokenId} className="flex flex-col gap-2">
-                <Image
+                <Image className="self-center"
                   src={nfts.image}
                   alt="NFT"
                   width="200"
